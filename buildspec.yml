@@ -4,6 +4,10 @@ run-as: root
 
 env:
   shell: bash
+  variables:
+    filename: "Test"
+    Env: "Dev"
+    phase: Testing
   git-credential-helper: no
         
 phases:
@@ -21,6 +25,11 @@ phases:
     run-as: root
     commands:
       - echo "Pre-Build phase starting...."
+      - mkdir -p $Env/$phase
+      - cd $Env/$phase
+      - pwd
+      - ls -lrt
+      - date
     finally:
       - echo "Pre-Build phase completed, proceed with next phase"
       - echo "Please check the logs for errors"
@@ -29,6 +38,7 @@ phases:
     run-as: root
     commands:
       - echo "Build phase starting...."
+      - touch $filename.txt
     finally:
       - echo "Build phase completed, proceed with next phase"
       - echo "Please check the logs for errors"
@@ -37,6 +47,9 @@ phases:
     run-as: root
     commands:
       - echo "Post-Build phase starting...."
+      - chmod -R 777 *
+      - pwd
+      - ls -lrt
     finally:
       - echo "Post-Build phase completed, proceed with next phase"
       - echo "Please check the logs for errors"
@@ -44,5 +57,3 @@ phases:
 artifacts:
   files:
     - '**/*'
-  name: Test-Artifact
-  s3-prefix: s3://testing9925/CodeBuild/
