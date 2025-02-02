@@ -10,9 +10,6 @@ phases:
   install:
     run-as: ec2-user
     on-failure: ABORT
-    runtime-versions:
-      runtime: version
-      runtime: version
     commands:
       - sudo yum update -y
       - sudo yum install git -y
