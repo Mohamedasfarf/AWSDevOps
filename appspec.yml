@@ -1,11 +1,9 @@
 version: 0.0
 os: linux
 files:
-  - source: /http*
+  - source: /
     destination: /App/Testing/CodeDeploy
-  - source: /install*
-    destination: /App/Testing/CodeDeploy
-  - source: /index*
+  - source: /index.html
     destination: /var/www/html
 hooks:
   ApplicationStop:
