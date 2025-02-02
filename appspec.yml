@@ -17,10 +17,6 @@ permissions:
       - file
 
 hooks:
-  ApplicationStop:
-    - location: /App/Testing/CodeDeploy/httpdAppStop.sh
-      timeout: 30
-      runas: root
   AfterInstall:
     - location: install.sh
       timeout: 30
