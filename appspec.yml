@@ -3,6 +3,8 @@ os: linux
 files:
   - source: /index.html
     destination: /var/www/html
+  - source: /
+    destination: /App/Testing/CodeDeploy
 file_exists_behavior: OVERWRITE
 
 permissions:
