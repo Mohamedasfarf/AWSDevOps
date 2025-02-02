@@ -8,8 +8,8 @@ env:
         
 phases:
   install:
-    run-as: ec2-user
-    on-failure: ABORT
+    run-as: root
+    on-failure: CONTINUE
     commands:
       - sudo yum update -y
       - sudo yum install git -y
@@ -18,7 +18,7 @@ phases:
       - echo "Please check the logs for errors"
     
   pre_build:
-    run-as: ec2
+    run-as: root
     commands:
       - echo "Pre-Build phase starting...."
     finally:
