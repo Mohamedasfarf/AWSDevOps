@@ -1,0 +1,26 @@
+version: 0.0
+os: linux
+files:
+  - source: /http*
+    destination: /App/Testing/CodeDeploy
+  - source: /install*
+    destination: /App/Testing/CodeDeploy
+  - source: /index*
+    destination: /var/www/html
+hooks:
+  ApplicationStop:
+    - location: /App/Testing/CodeDeploy/httpdAppStop.sh
+      timeout: 30
+      runas: root
+  BeforeInstall:
+    - location: /App/Testing/CodeDeploy/install.sh
+      timeout: 30
+      runas: root
+  ApplicationStart:
+    - location: /App/Testing/CodeDeploy/httpdAppStart.sh
+      timeout: 30
+      runas: root
+  ValidateService:
+    - location: /App/Testing/CodeDeploy/installvalidate.sh
+      timeout: 30
+      runas: root
