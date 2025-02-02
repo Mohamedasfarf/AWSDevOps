@@ -1,8 +1,6 @@
 version: 0.0
 os: linux
 files:
-  - source: /
-    destination: /App/Testing/CodeDeploy
   - source: /index.html
     destination: /var/www/html
 
