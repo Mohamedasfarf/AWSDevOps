@@ -1,0 +1,51 @@
+version: 0.2
+
+run-as: root
+
+env:
+  shell: bash
+  git-credential-helper: no
+        
+phases:
+  install:
+    run-as: ec2-user
+    on-failure: ABORT
+    runtime-versions:
+      runtime: version
+      runtime: version
+    commands:
+      - sudo yum update -y
+      - sudo yum install git -y
+    finally:
+      - echo "Install phase completed, proceed with next phase"
+      - echo "Please check the logs for errors"
+    
+  pre_build:
+    run-as: ec2
+    commands:
+      - echo "Pre-Build phase starting...."
+    finally:
+      - echo "Pre-Build phase completed, proceed with next phase"
+      - echo "Please check the logs for errors"
+    
+  build:
+    run-as: root
+    commands:
+      - echo "Build phase starting...."
+    finally:
+      - echo "Build phase completed, proceed with next phase"
+      - echo "Please check the logs for errors"
+    
+  post_build:
+    run-as: root
+    commands:
+      - echo "Post-Build phase starting...."
+    finally:
+      - echo "Post-Build phase completed, proceed with next phase"
+      - echo "Please check the logs for errors"
+    
+artifacts:
+  files:
+    - '**/*'
+  name: Test-Artifact
+  s3-prefix: s3://testing9925/CodeBuild/
